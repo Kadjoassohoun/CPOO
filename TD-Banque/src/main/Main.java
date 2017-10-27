@@ -27,7 +27,9 @@ public final class Main {
         handler.setLevel(Level.FINE);
         LOG.addHandler(handler);
         LOG.setLevel(Level.FINE);
+
         }catch(IOException ioe){
+
             LOG.warning("Fichier introuvable !");
         }
 
@@ -40,16 +42,19 @@ public final class Main {
         double amount = 1900.0d;
         
         try{
-            double retrait = c1.withdraw(6500.0d);  
+            double retrait = c1.withdraw(6500.0d);
+
         }catch(InsufficientBalance ex){
+
             LOG.severe(ex.getMessage());
+
         }finally {
-           LOG.fine("Withdraw operation of ELISEE" + amount);
+
+            LOG.fine("Withdraw operation of ELISEE" + amount);
             LOG.log(Level.FINE, " ELISEE");
-            LOG.log(Level.FINER, "ELISEE");
-            LOG.log(Level.FINEST, "ELISEE");
 
         }
+        
         double newSolde = c2.deposit(100000.0d);
         LOG.info(c1.toString());
         System.out.println(c2.toString());

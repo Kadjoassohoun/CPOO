@@ -1,6 +1,7 @@
 package model.dec;
 
 public interface CompteItf {
+	
 	String getOwner();
 
     String getNum();

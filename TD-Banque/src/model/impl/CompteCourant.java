@@ -51,7 +51,7 @@ public final class CompteCourant extends Compte implements CompteManip {
 
         try{
             if(previous - amount < 0.0d) {
-                throw new InsufficientBalance("Overdraft. Current balance = "+previous);
+                throw new InsufficientBalance("Overdraft. Current balance = " +previous);
             }
         }catch(InsufficientBalance ex){
             LOG.severe("Overdraft of "+(previous-amount)+" on account with balance "+previous);

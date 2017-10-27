@@ -38,10 +38,11 @@ public final class CompteEpargne extends Compte
         return this.interestRates;
     }
 
-     @Override
+    
+    @Override
     public double withdraw(double amount)
     {
-        if (this.getBalance()<= 50)
+        if (this.getBalance() <= 50)
         {
             System.out.println ("Erreur : Retrait impossible, solde insuffisant !");
         }
@@ -67,6 +68,6 @@ public final class CompteEpargne extends Compte
         StringBuilder sb = new StringBuilder();
         sb = super().tostring();
         sb.append(" Interêt d'épargne : ").append(this.interestRates).append("%\n");
-        return sb.toString(); //Retouner avec le .toString() car c'est un stringBuilder (ATTENTION !!)
+        return sb.toString();                                                         //Retouner avec le .toString() car c'est un stringBuilder (ATTENTION !!)
     }
 }
