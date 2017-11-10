@@ -1,7 +1,7 @@
 package model.impl;
 
 import java.util.Calendar;
-
+ 
 /**
 * Model a check account
 */
