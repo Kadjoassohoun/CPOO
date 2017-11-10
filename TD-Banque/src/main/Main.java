@@ -3,60 +3,70 @@ package main;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 import java.util.logging.Handler;
-import java.util.logging.ConsoleHandler;
 import java.util.logging.FileHandler;
 import java.io.IOException;
-import java.util.logging.SimpleFormatter ;
-
 
 import model.dec.CompteManip;
 import model.fact.CompteFactory;
-import model.exceptions.InsufficientBalance;
+import model.exceptions.*;
 
-public final class Main {
+public final class Main
+{
+
     private static final Logger LOG = Logger.getLogger(Main.class.getCanonicalName());
 
-    public static void main (String[] args) {
-
-        try{
-            Handler handler = new FileHandler("bank.log",true);
-            handler.setLevel(Level.FINEST);
+    public static void main (String[] args) throws InterestRatesException {
+        try {
+            Handler handler = new FileHandler("bank.log", true);
+            handler.setLevel(Level.FINE);
             LOG.addHandler(handler);
-
-        handler.setFormatter(new SimpleFormatter());
-        handler.setLevel(Level.FINE);
-        LOG.addHandler(handler);
-        LOG.setLevel(Level.FINE);
-
-        }catch(IOException ioe){
-
+        } catch (IOException ioe)
+        {
             LOG.warning("Fichier introuvable !");
         }
-
-        CompteFactory cf = new CompteFactory();
-    	
-    	CompteManip c1 = cf.createCompteCourant("John Doe");
-    	CompteManip c2 = cf.createCompteCourant("Jack Bauer");
-
-    	c1.deposit(1500.0d);
-        double amount = 1900.0d;
         
-        try{
-            double retrait = c1.withdraw(6500.0d);
+            CompteFactory cf = new CompteFactory();
+        
+            CompteManip c1 = cf.createCompteCourant("John Doe", 50);
+            CompteManip c2 = cf.createCompteCourant("Jack Bauer");
+            CompteManip c3 = cf.createCompteEpargne("Johnny Doc", -0.6f);
+    
+            double amount = 1900.0d;
 
-        }catch(InsufficientBalance ex){
+        try
+        {
+            c1.deposit(100.0d);
+            double retrait = c1.withdraw(amount);
+            double newSolde = c2.deposit(100000.0d);
 
-            LOG.severe(ex.getMessage());
 
-        }finally {
-
-            LOG.fine("Withdraw operation of ELISEE" + amount);
-            LOG.log(Level.FINE, " ELISEE");
-
+            c3.deposit(100.0d);
+            c3.withdraw(55.0d);
         }
-        
-        double newSolde = c2.deposit(100000.0d);
-        LOG.info(c1.toString());
-        System.out.println(c2.toString());
+    	catch (InsufficientBalanceException e)
+        {
+            LOG.severe(e.getMessage());
+            //System.out.println(e);
+        }
+
+        /*catch (InterestRatesException e)
+        {
+            LOG.severe(e.getMessage());
+           //System.out.println(e);
+        }*/
+        catch (Exception e)
+        {
+            LOG.severe(e.getMessage());
+            //System.out.println(e);
+        }
+        finally
+        {
+            LOG.config("Withdraw operation of " + amount);
+        }
+
+        System.out.println(c1);
+        System.out.println(c2);
+        System.out.println(c3);
+
     }
 }
