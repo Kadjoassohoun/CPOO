@@ -24,7 +24,7 @@ public abstract class Compte implements CompteItf
 
     public Compte (String owner)
     {
-        this(owner, 0.0d);         //Appel du constructeur precedent
+        this(owner, 0.0d); //Appel du constructeur precedent
     }
 
     @Override
