@@ -1,11 +1,12 @@
 package model.decl;
 
 
+import java.exceptions.SalleEstPleine;
 
 public interface SalleCinemaItf{
 
 
-	void vendrePlace();
+	void vendrePlace() throws SalleEstPleine;
 
 	double tauxRemplissage();
 
