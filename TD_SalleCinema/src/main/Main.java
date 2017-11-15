@@ -20,12 +20,12 @@ public final class Main {
         SalleFactory sf = new SalleFactory();
 
         SalleCinema s1 = new SalleCinema();
-        SalleCinema s2 = sf.createSalleCinema("Fast and Furious 8",500,14.7);
+        SalleCinema s2 = sf.createSalleCinema("Fast and Furious 8",300,14.7);
 
         
         try{
             int i;
-            for(i = 0; i <= 600; i++){
+            for(i = 0; i <= 400; i++){
                 s2.vendrePlace();
             }
         }catch(SalleEstPleine ex){
