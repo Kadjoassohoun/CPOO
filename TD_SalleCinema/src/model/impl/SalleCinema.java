@@ -6,6 +6,7 @@ import java.lang.StringBuilder
 import java.util.logging.Logger;
 
 import model.dec.SalleCinemaItf;
+import model.exceptions.SalleEstPleine;
 
 /*
 *  model Salle de cinema
@@ -29,9 +30,24 @@ public  class SalleCinema implements SalleCinemaItf
         this.prix = prix;
     }
 
-    public int vendrePlace()
-    {
-    	return this.prix;
+    public void vendrePlace() throws SalleEstPleine {
+
+        try{
+            if (nbPlacesDisponible() == 0)
+            {
+
+                throw new SallePleine("Salle remplie");
+            }
+
+        }catch(SalleEstPleine ex){
+
+            LOG.severe("La salle est déjà remplie, elle contient " +nbPlacesVendues()+ " personnes");
+
+            throw ex;
+        } finally {
+
+            this.nbPlaceVendues++;
+        }
     }
 
     public double tauxRemplissage()
@@ -45,12 +61,12 @@ public  class SalleCinema implements SalleCinemaItf
     {
     	if(this.nbPlaceVendues == this.nbPlaces)
         {
-    		System.out.printf("La salle de cinema est pleine");
+    		LOG.severe("La salle de cinema est pleine");
         }
 
         else{
 
-            System.out.printf("La salle de cinema n'est pas pleine");
+            LOG.severe("Il reste " +nbPlacesDisponibles()+ "places disponibles dans la salle");
         }
     }
 
