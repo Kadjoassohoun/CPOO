@@ -31,7 +31,7 @@ public  class SalleCinema implements SalleCinemaItf
 
     public int vendrePlace()
     {
-    	return prix;
+    	return this.prix;
     }
 
     public double tauxRemplissage()
